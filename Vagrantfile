@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
 
     chef.add_recipe "postgis"
     chef.add_recipe "database-provision"
+    chef.add_recipe "liquibase"
 
     chef.json = {
       "postgresql" => {
