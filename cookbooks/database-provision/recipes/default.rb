@@ -7,3 +7,12 @@ postgresql_database 'geoserver' do
   template 'template_postgis'
   action :create
 end
+
+# liquibase needs this to connect.
+package 'libpostgresql-jdbc-java'
+
+# convenience script to generate liquibase changelog.
+cookbook_file '/tmp/generate_changelog.sh' do
+  source 'generate_changelog.sh'
+  mode 0755
+end
