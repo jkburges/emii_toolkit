@@ -1,0 +1,10 @@
+#!/bin/bash
+
+java -jar /opt/liquibase-2.0.4/liquibase.jar \
+    --classpath=/usr/share/java/postgresql-jdbc4.jar \
+    --username=postgres \
+    --password=<%= node[:postgresql][:password][:postgres] %> \
+    --url="jdbc:postgresql://localhost:<%= node[:postgresql][:config][:port] %>/geoserver" diff \
+    --referenceUsername=postgres \
+    --referencePassword=<%= node[:postgresql][:password][:postgres] %> \
+    --referenceUrl="jdbc:postgresql://localhost:<%= node[:postgresql][:config][:port] %>/geoserver_diff"
