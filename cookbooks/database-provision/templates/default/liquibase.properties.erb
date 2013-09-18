@@ -1,7 +1,7 @@
 classpath: /usr/share/java/postgresql-jdbc4.jar
 username: postgres
 password: <%= node[:postgresql][:password][:postgres] %>
-url: jdbc:postgresql://localhost:<%= node[:postgresql][:config][:port] %>/geoserver
+url: jdbc:postgresql://localhost:<%= node[:postgresql][:config][:port] %>/geoserver_diff
 referenceUsername: postgres
 referencePassword: <%= node[:postgresql][:password][:postgres] %>
-referenceUrl: jdbc:postgresql://localhost:<%= node[:postgresql][:config][:port] %>/geoserver_diff
+referenceUrl: jdbc:postgresql://localhost:<%= node[:postgresql][:config][:port] %>/geoserver
