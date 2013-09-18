@@ -10,13 +10,19 @@ package 'libpostgresql-jdbc-java'
 include_recipe 'git'
 
 # Checkout database git repo
+directory node['development']['workspace'] do
+  owner 'vagrant'
+  group 'vagrant'
+end
+
 bash "install_something" do
-  user "vagrant"
-  cwd "/home/vagrant"
+  user 'vagrant'
+  group 'vagrant'
+  cwd node['development']['workspace']
   code <<-EOH
   git clone https://github.com/jkburges/emii_db.git
   EOH
-  not_if { ::File.exists?('/home/vagrant/emii_db') }
+  not_if { ::File.exists?("#{node['development']['workspace']}/emii_db") }
 end
 
 template '/usr/local/bin/generate_diff.sh' do
@@ -47,7 +53,7 @@ end
 
   # Apply changelog
   liquibase_migrate 'migrate' do
-    change_log_file '/home/vagrant/emii_db/changelog.xml'
+    change_log_file "#{node['development']['workspace']}/emii_db/changelog.xml"
     jar "#{node[:liquibase][:install_path]}/liquibase.jar"
     connection connection.merge(:database => database_name)
     classpath '/usr/share/java/postgresql-jdbc4.jar'

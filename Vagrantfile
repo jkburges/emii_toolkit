@@ -8,11 +8,17 @@ Vagrant.configure("2") do |config|
 
   config.vm.network :forwarded_port, guest: 5432, host: 15432
 
+  workspace = "/home/vagrant/workspace"
+  config.vm.synced_folder "workspace/", workspace
+
   config.vm.provision :chef_solo do |chef|
 
     chef.add_recipe "database-provision"
 
     chef.json = {
+      "development" => {
+        "workspace" => workspace
+      },
       "postgresql" => {
         "config" => {
           "listen_addresses" => '*'
