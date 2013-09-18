@@ -1,5 +1,0 @@
-#!/bin/bash
-
-java -jar /opt/liquibase-2.0.4/liquibase.jar \
-    --defaultsFile=<%= node['development']['workspace'] %>/liquibase.properties \
-    diffChangeLog

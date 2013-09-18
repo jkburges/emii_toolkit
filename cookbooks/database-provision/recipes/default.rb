@@ -34,12 +34,7 @@ directory "#{node['development']['workspace']}/bin" do
   group 'vagrant'
 end
 
-template "#{node['development']['workspace']}/bin/generate_diff.sh" do
-  mode 0755
-end
-
-# convenience script to generate liquibase changelog.
-template "#{node['development']['workspace']}/bin/generate_changelog.sh" do
+template "#{node['development']['workspace']}/bin/run_liquibase.sh" do
   mode 0755
 end
 
