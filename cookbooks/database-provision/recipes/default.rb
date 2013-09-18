@@ -25,15 +25,23 @@ bash "install_something" do
   not_if { ::File.exists?("#{node['development']['workspace']}/emii_db") }
 end
 
-template '/usr/local/bin/generate_diff.sh' do
+template "#{node['development']['workspace']}/liquibase.properties" do
+  mode 0644
+end
+
+directory "#{node['development']['workspace']}/bin" do
+  owner 'vagrant'
+  group 'vagrant'
+end
+
+template "#{node['development']['workspace']}/bin/generate_diff.sh" do
   mode 0755
 end
 
 # convenience script to generate liquibase changelog.
-cookbook_file '/usr/local/bin/generate_changelog.sh' do
+template "#{node['development']['workspace']}/bin/generate_changelog.sh" do
   mode 0755
 end
-
 
 ['geoserver', 'geoserver_diff'].each do |database_name|
 
